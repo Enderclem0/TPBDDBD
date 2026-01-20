@@ -55,7 +55,7 @@ vous pouvez créer un sérializer et un déserializer pour Avro.
 les informations des étudiants dans la console.
 
 - Créer un serde nommé SerdeAvro pour la classe Student.
-- Configurer l'application Kafka Streams avec les propriétés nécessaires : BOOTSTRAP_SERVERS_CONFIG et APPLICATION_ID_CONFIG.
+- Configurer l'application Kafka Streams avec les propriétés nécessaires : BOOTSTRAP_SERVERS_CONFIG et APPLICATION_ID_CONFIG.   
 - Construire le flux de données pour lire depuis le topic `students-avro`, il faut pour ce faire :
   - Un StreamsConfig.
   - Un StreamsBuilder avec un KStream pour lire les messages du topic.
@@ -74,4 +74,6 @@ Un serde est une classe qui expose deux fonctions qui permettent de recuperer le
 foreach lit les résultats et applique une fonction.
 to renvoie les données au topics spécifié.
 4. **Comment Kafka Streams gère-t-il la tolérance aux pannes ?**
+Si le broker kafka passe en down, le stream reessaie la connection.
 5. **Que se passe-t-il si on redémarre l'application Streams ? Les données sont-elles retraitées ?**
+Kafka utilise un systeme de commit et d'offset pour ne renvoyer que les messages non traités (et ceux non-commités).

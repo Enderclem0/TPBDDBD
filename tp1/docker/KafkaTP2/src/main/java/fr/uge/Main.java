@@ -21,8 +21,10 @@ public class Main {
         config.put("key.deserializer", StringDeserializer.class.getName());
         //config.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         //config.put("value.deserializer", "org.apache.kafka.common.serialization.StringDeserializer");
-        config.put("value.serializer", "fr.uge.ProducedObjectSerializer");
-        config.put("value.deserializer", "fr.uge.ProducedObjectDeserializer");
+        //config.put("value.serializer", "fr.uge.ProducedObjectSerializer");
+        //config.put("value.deserializer", "fr.uge.ProducedObjectDeserializer");
+        config.put("value.serializer", "fr.uge.ProducedObjectSerializerCustom");
+        config.put("value.deserializer", "fr.uge.ProducedObjectDeserializerCustom");
         config.put("json.payload.class", ProducedObject.class.getName());
 
         var consumerThread1 = Thread.ofPlatform().start(new TP2KafkaConsumer<>(config, "Robert"));

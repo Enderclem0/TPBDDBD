@@ -11,19 +11,22 @@ import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class TP2KafkaConsumer<K,V> implements Runnable, AutoCloseable {
-    private static final String TOPIC =  "etudiants";
-    private static final Duration timeout = Duration.ofSeconds(10);
+
+    private static final String TOPIC =  "Etudiants5";
+    private static final Duration TIMEOUT = Duration.ofSeconds(10);
+    private final String name;
     private final KafkaConsumer<K,V> consumer;
     private final AtomicBoolean shutdown = new AtomicBoolean(false);
 
-    public TP2KafkaConsumer(Properties config) {
+    public TP2KafkaConsumer(Properties config, String name) {
         Objects.requireNonNull(config);
-        Objects.requireNonNull(config);
+        Objects.requireNonNull(name);
+        this.name = name;
         this.consumer = new KafkaConsumer<>(config);
     }
 
     private void process(ConsumerRecord<K,V> record) {
-        System.out.println(record.value());
+        System.out.println(name+": "+record.value());
     }
 
 
@@ -33,7 +36,7 @@ public class TP2KafkaConsumer<K,V> implements Runnable, AutoCloseable {
             consumer.subscribe(Collections.singletonList(TOPIC));
 
             while (!shutdown.get()) {
-                ConsumerRecords<K, V> records = consumer.poll(timeout);
+                ConsumerRecords<K, V> records = consumer.poll(TIMEOUT);
                 records.forEach(this::process);
             }
         } finally {

@@ -9,7 +9,7 @@ import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 
 public class TP2KafkaProducer<K,V> implements Closeable {
-    private static final String TOPIC =  "etudiants";
+    private static final String TOPIC =  "Etudiants5";
     private final KafkaProducer<K,V> producer;
 
 

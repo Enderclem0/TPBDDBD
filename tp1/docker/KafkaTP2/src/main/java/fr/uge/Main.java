@@ -25,7 +25,12 @@ public class Main {
         config.put("value.deserializer", "fr.uge.ProducedObjectDeserializer");
         config.put("json.payload.class", ProducedObject.class.getName());
 
-        var consumerThread = Thread.ofPlatform().start(new TP2KafkaConsumer<>(config));
+        var consumerThread1 = Thread.ofPlatform().start(new TP2KafkaConsumer<>(config, "Robert"));
+        var consumerThread2 = Thread.ofPlatform().start(new TP2KafkaConsumer<>(config, "Sasuke"));
+        var consumerThread3 = Thread.ofPlatform().start(new TP2KafkaConsumer<>(config, "Saul"));
+        var consumerThread4 = Thread.ofPlatform().start(new TP2KafkaConsumer<>(config, "Batman"));
+        var consumerThread5 = Thread.ofPlatform().start(new TP2KafkaConsumer<>(config, "Popol"));
+
         /*var producerThread = Thread.ofPlatform().start(()-> {
             try (var producer = new TP2KafkaProducer<>(config)) {
                 for (int i = 0; i < 500; i++) {
@@ -52,7 +57,11 @@ public class Main {
                 System.out.println(e);
             }
         });
-        consumerThread.join();
+        consumerThread1.join();
+        consumerThread2.join();
+        consumerThread3.join();
+        consumerThread4.join();
+        consumerThread5.join();
         //producerThread.join();
         producerJsonThread.join();
     }
